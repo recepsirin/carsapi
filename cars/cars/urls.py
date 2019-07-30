@@ -19,5 +19,5 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/cars/', include('cars.api.urls', namespace='api-cars')),
+    path('api/list/', include('carsapp.api.urls'), name='api-cars'),
 ]

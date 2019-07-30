@@ -1,5 +1,7 @@
 from django.db import models
 
+from rest_framework.reverse import reverse as api_reverse
+
 
 # Create your models here.
 class cars(models.Model):
@@ -18,3 +20,6 @@ class cars(models.Model):
     class Meta:
         managed = False
         db_table = 'cars'
+
+    def get_api_url(self, request=None):
+        return api_reverse("api-cars:cars-rud", kwargs={'id': self.id}, request=request)

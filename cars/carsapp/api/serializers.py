@@ -1,10 +1,8 @@
 from rest_framework import serializers
-from cars.carsapp.models import cars
+from carsapp.models import cars
 
 
-class BlogPostSerializers(serializers.ModelSerializer):
-    url = serializers.SerializerMethodField(read_only=True)
-
+class CarSerializers(serializers.ModelSerializer):
     class Meta:
         model = cars
         fields = [
@@ -18,3 +16,7 @@ class BlogPostSerializers(serializers.ModelSerializer):
             'phone',
         ]
         read_only_fields = ['id']
+
+    def get_url(self, obj):
+        request = self.context.get('request')
+        return obj.get_api_url(request=request)
